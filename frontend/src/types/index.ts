@@ -1,23 +1,23 @@
 export type ResearchDomain =
-    | "Computer Science"
+    | "Computer_Science"
     | "Biology"
     | "Physics"
     | "Chemistry"
     | "Mathematics"
-    | "Social Sciences";
+    | "Social_Sciences";
 
 export type ReadingStage =
-    | "Abstract Read"
-    | "Introduction Done"
-    | "Methodology Done"
-    | "Results Analyzed"
-    | "Fully Read"
-    | "Notes Completed";
+    | "Abstract_Read"
+    | "Introduction_Done"
+    | "Methodology_Done"
+    | "Results_Analyzed"
+    | "Fully_Read"
+    | "Notes_Completed";
 
 export type ImpactScore =
-    | "High Impact"
-    | "Medium Impact"
-    | "Low Impact"
+    | "High_Impact"
+    | "Medium_Impact"
+    | "Low_Impact"
     | "Unknown";
 
 export interface Paper {

@@ -1,5 +1,6 @@
 import { ResponsiveContainer, FunnelChart as ReFunnelChart, Funnel, LabelList, Tooltip, Cell } from 'recharts';
 import { Card, CardContent, CardHeader } from '@mui/material';
+import { enumToDisplay } from '@/lib/enumUtils';
 
 const COLORS = [
     "#0f172a", // Primary dark
@@ -15,16 +16,21 @@ interface Props {
 }
 
 export default function FunnelChart({ data }: Props) {
+    const chartData = data.map(item => ({
+        ...item,
+        stage: enumToDisplay(item.stage)
+    }));
+
     return (
         <Card>
             <CardHeader title="Reading Pipeline" titleTypographyProps={{ variant: 'h6' }} />
             <CardContent sx={{ height: 300 }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <ReFunnelChart>
-                        <Tooltip />
-                        <Funnel dataKey="count" data={data} isAnimationActive>
+                        <Tooltip formatter={(value: any, _name: any, props: any) => [value, props.payload.stage]} />
+                        <Funnel dataKey="count" data={chartData} isAnimationActive>
                             <LabelList position="right" fill="#000" stroke="none" dataKey="stage" />
-                            {data.map((_, index) => (
+                            {chartData.map((_, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
                         </Funnel>

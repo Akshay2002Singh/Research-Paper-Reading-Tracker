@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import { STAGES } from '@/lib/constants';
+import { enumToDisplay } from '@/lib/enumUtils';
 
 const STAGE_COLORS = [
     "#0d47a1",
@@ -33,12 +34,20 @@ export default function StackedBarChart({ data }: Props) {
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart data={chartData}>
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="domain" fontSize={12} interval={0} angle={-30} textAnchor="end" height={60} />
+                        <XAxis
+                            dataKey="domain"
+                            fontSize={12}
+                            interval={0}
+                            angle={-30}
+                            textAnchor="end"
+                            height={60}
+                            tickFormatter={enumToDisplay}
+                        />
                         <YAxis />
-                        <Tooltip />
-                        <Legend wrapperStyle={{ paddingTop: "20px" }} />
+                        <Tooltip formatter={(value: any, name: any) => [value, enumToDisplay(name || '')]} />
+                        <Legend wrapperStyle={{ paddingTop: "20px" }} formatter={(value) => enumToDisplay(value)} />
                         {STAGES.map((stage, idx) => (
-                            <Bar key={stage} dataKey={stage} stackId="a" fill={STAGE_COLORS[idx % STAGE_COLORS.length]} />
+                            <Bar key={stage} dataKey={stage} name={enumToDisplay(stage)} stackId="a" fill={STAGE_COLORS[idx % STAGE_COLORS.length]} />
                         ))}
                     </BarChart>
                 </ResponsiveContainer>

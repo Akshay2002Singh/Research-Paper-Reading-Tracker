@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Paper, ResearchDomain, ReadingStage, ImpactScore } from '../types';
+import { enumToDisplay } from '@/lib/enumUtils';
 import {
     Box,
     Button,
@@ -22,9 +23,9 @@ export default function PaperForm({ onSubmit, isLoading }: PaperFormProps) {
     const [formData, setFormData] = useState({
         title: '',
         firstAuthor: '',
-        domain: 'Computer Science' as ResearchDomain,
-        readingStage: 'Abstract Read' as ReadingStage,
-        citationCount: 0,
+        domain: 'Computer_Science' as ResearchDomain,
+        readingStage: 'Abstract_Read' as ReadingStage,
+        citationCount: 0 as number | string,
         impactScore: 'Unknown' as ImpactScore,
     });
 
@@ -34,7 +35,10 @@ export default function PaperForm({ onSubmit, isLoading }: PaperFormProps) {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        onSubmit(formData);
+        onSubmit({
+            ...formData,
+            citationCount: Number(formData.citationCount) || 0
+        } as any);
     };
 
     return (
@@ -72,7 +76,7 @@ export default function PaperForm({ onSubmit, isLoading }: PaperFormProps) {
                             >
                                 {DOMAINS.map((option) => (
                                     <MenuItem key={option} value={option}>
-                                        {option}
+                                        {enumToDisplay(option)}
                                     </MenuItem>
                                 ))}
                             </TextField>
@@ -90,7 +94,7 @@ export default function PaperForm({ onSubmit, isLoading }: PaperFormProps) {
                             >
                                 {STAGES.map((option) => (
                                     <MenuItem key={option} value={option}>
-                                        {option}
+                                        {enumToDisplay(option)}
                                     </MenuItem>
                                 ))}
                             </TextField>
@@ -101,7 +105,7 @@ export default function PaperForm({ onSubmit, isLoading }: PaperFormProps) {
                                 type="number"
                                 fullWidth
                                 value={formData.citationCount}
-                                onChange={(e) => handleChange('citationCount', parseInt(e.target.value) || 0)}
+                                onChange={(e) => handleChange('citationCount', e.target.value)}
                                 InputProps={{
                                     inputProps: { min: 0 }
                                 }}
@@ -118,7 +122,7 @@ export default function PaperForm({ onSubmit, isLoading }: PaperFormProps) {
                     >
                         {IMPACTS.map((option) => (
                             <MenuItem key={option} value={option}>
-                                {option}
+                                {enumToDisplay(option)}
                             </MenuItem>
                         ))}
                     </TextField>

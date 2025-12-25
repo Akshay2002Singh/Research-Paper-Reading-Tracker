@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getAnalytics } from '@/api/papers';
+import { enumToDisplay } from '@/lib/enumUtils';
 import FunnelChart from '@/components/charts/FunnelChart';
 import ScatterPlot from '@/components/charts/ScatterPlot';
 import StackedBarChart from '@/components/charts/StackedBarChart';
@@ -32,33 +33,65 @@ export default function Analytics() {
 
             <Grid container spacing={3} sx={{ mb: 4 }}>
                 <Grid item xs={12} md={6} lg={3}>
-                    <Card>
+                    <Card sx={{ height: '100%' }}>
                         <CardContent>
-                            <Typography variant="subtitle2" color="text.secondary">Completion Rate</Typography>
+                            <Typography variant="subtitle2" color="text.secondary" gutterBottom>Completion Rate</Typography>
                             <Typography variant="h4" fontWeight="bold">
                                 {data.summary.completionRate.toFixed(1)}%
                             </Typography>
-                            <Typography variant="caption" color="text.secondary">Papers Fully Read</Typography>
+                            <Typography variant="caption" color="text.secondary">Papers Fully Read / Total</Typography>
                         </CardContent>
                     </Card>
                 </Grid>
 
                 <Grid item xs={12} md={6} lg={3}>
-                    <Card>
+                    <Card sx={{ height: '100%' }}>
                         <CardContent>
-                            <Typography variant="subtitle2" color="text.secondary">Highest Avg Citations</Typography>
+                            <Typography variant="subtitle2" color="text.secondary" gutterBottom>Top Research Domain</Typography>
                             {topDomain ? (
                                 <>
                                     <Typography variant="h4" fontWeight="bold">
                                         {Math.round(topDomain.avgCitations)}
                                     </Typography>
                                     <Typography variant="caption" color="text.secondary">
-                                        {topDomain.domain}
+                                        Avg. citations in {enumToDisplay(topDomain.domain)}
                                     </Typography>
                                 </>
                             ) : (
                                 <Typography variant="h4" fontWeight="bold">-</Typography>
                             )}
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+                <Grid item xs={12} md={6} lg={3}>
+                    <Card sx={{ height: '100%' }}>
+                        <CardContent>
+                            <Typography variant="subtitle2" color="text.secondary" gutterBottom>Papers by Stage</Typography>
+                            <Box sx={{ mt: 1 }}>
+                                {Object.entries(data.summary.papersByStage).map(([stage, count]) => (
+                                    <Box key={stage} sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
+                                        <Typography variant="caption">{enumToDisplay(stage)}</Typography>
+                                        <Typography variant="caption" fontWeight="bold">{count}</Typography>
+                                    </Box>
+                                ))}
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Grid>
+
+                <Grid item xs={12} md={6} lg={3}>
+                    <Card sx={{ height: '100%' }}>
+                        <CardContent>
+                            <Typography variant="subtitle2" color="text.secondary" gutterBottom>Avg Citations by Domain</Typography>
+                            <Box sx={{ mt: 1 }}>
+                                {data.summary.avgCitationsByDomain.map((item) => (
+                                    <Box key={item.domain} sx={{ display: 'flex', justifyContent: 'space-between', mb: 0.5 }}>
+                                        <Typography variant="caption">{enumToDisplay(item.domain)}</Typography>
+                                        <Typography variant="caption" fontWeight="bold">{Math.round(item.avgCitations)}</Typography>
+                                    </Box>
+                                ))}
+                            </Box>
                         </CardContent>
                     </Card>
                 </Grid>

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Paper as PaperType } from '@/types';
+import { enumToDisplay } from '@/lib/enumUtils';
 import {
     Table,
     TableBody,
@@ -80,13 +81,13 @@ export default function PaperTable({ papers }: PaperTableProps) {
                                     </Typography>
                                 </TableCell>
                                 <TableCell>{paper.firstAuthor}</TableCell>
-                                <TableCell>{paper.domain}</TableCell>
+                                <TableCell>{enumToDisplay(paper.domain)}</TableCell>
                                 <TableCell>
-                                    <Chip label={paper.readingStage} size="small" variant="outlined" />
+                                    <Chip label={enumToDisplay(paper.readingStage)} size="small" variant="outlined" />
                                 </TableCell>
                                 <TableCell>
                                     <Chip
-                                        label={paper.impactScore}
+                                        label={enumToDisplay(paper.impactScore)}
                                         size="small"
                                         color={getImpactColor(paper.impactScore) as any}
                                         variant={paper.impactScore === 'Unknown' ? 'outlined' : 'filled'}
@@ -143,14 +144,14 @@ export default function PaperTable({ papers }: PaperTableProps) {
                             <Grid item xs={12} sm={6}>
                                 <Typography variant="subtitle2" color="text.secondary">Research Domain</Typography>
                                 <Typography variant="body1" sx={{ mt: 0.5 }}>
-                                    {selectedPaper.domain}
+                                    {enumToDisplay(selectedPaper.domain)}
                                 </Typography>
                             </Grid>
 
                             <Grid item xs={12} sm={6}>
                                 <Typography variant="subtitle2" color="text.secondary">Reading Stage</Typography>
                                 <Chip
-                                    label={selectedPaper.readingStage}
+                                    label={enumToDisplay(selectedPaper.readingStage)}
                                     variant="outlined"
                                     sx={{ mt: 0.5 }}
                                 />
@@ -159,7 +160,7 @@ export default function PaperTable({ papers }: PaperTableProps) {
                             <Grid item xs={12} sm={6}>
                                 <Typography variant="subtitle2" color="text.secondary">Impact Score</Typography>
                                 <Chip
-                                    label={selectedPaper.impactScore}
+                                    label={enumToDisplay(selectedPaper.impactScore)}
                                     color={getImpactColor(selectedPaper.impactScore) as any}
                                     variant={selectedPaper.impactScore === 'Unknown' ? 'outlined' : 'filled'}
                                     sx={{ mt: 0.5 }}

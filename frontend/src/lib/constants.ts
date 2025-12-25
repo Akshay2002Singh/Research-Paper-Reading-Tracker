@@ -1,13 +1,13 @@
 import { ResearchDomain, ReadingStage, ImpactScore } from "@/types";
 
 export const DOMAINS: ResearchDomain[] = [
-    "Computer Science", "Biology", "Physics", "Chemistry", "Mathematics", "Social Sciences"
+    "Computer_Science", "Biology", "Physics", "Chemistry", "Mathematics", "Social_Sciences"
 ];
 
 export const STAGES: ReadingStage[] = [
-    "Abstract Read", "Introduction Done", "Methodology Done", "Results Analyzed", "Fully Read", "Notes Completed"
+    "Abstract_Read", "Introduction_Done", "Methodology_Done", "Results_Analyzed", "Fully_Read", "Notes_Completed"
 ];
 
 export const IMPACTS: ImpactScore[] = [
-    "High Impact", "Medium Impact", "Low Impact", "Unknown"
+    "High_Impact", "Medium_Impact", "Low_Impact", "Unknown"
 ];

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { DOMAINS, STAGES, IMPACTS } from '@/lib/constants';
+import { enumToDisplay } from '@/lib/enumUtils';
 import {
     Accordion,
     AccordionSummary,
@@ -86,7 +87,7 @@ export default function FiltersPanel({ initialFilters, onFilterChange }: Filters
                                         size="small"
                                     />
                                 }
-                                label={d}
+                                label={enumToDisplay(d)}
                             />
                         ))}
                     </Box>
@@ -109,7 +110,7 @@ export default function FiltersPanel({ initialFilters, onFilterChange }: Filters
                                         size="small"
                                     />
                                 }
-                                label={s}
+                                label={enumToDisplay(s)}
                             />
                         ))}
                     </Box>
@@ -132,7 +133,7 @@ export default function FiltersPanel({ initialFilters, onFilterChange }: Filters
                                         size="small"
                                     />
                                 }
-                                label={i}
+                                label={enumToDisplay(i)}
                             />
                         ))}
                     </Box>

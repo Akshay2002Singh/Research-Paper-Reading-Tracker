@@ -1,10 +1,11 @@
 import { ResponsiveContainer, ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import { Card, CardContent, CardHeader } from '@mui/material';
+import { enumToDisplay } from '@/lib/enumUtils';
 
 const IMPACT_COLORS: Record<string, string> = {
-    "High Impact": "#d32f2f", // Error Red
-    "Medium Impact": "#1976d2", // Primary Blue
-    "Low Impact": "#757575",   // Grey
+    "High_Impact": "#d32f2f", // Error Red
+    "Medium_Impact": "#1976d2", // Primary Blue
+    "Low_Impact": "#757575",   // Grey
     "Unknown": "#e0e0e0"       // Light Grey
 };
 
@@ -27,9 +28,18 @@ export default function ScatterPlot({ data }: Props) {
                     <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
                         <CartesianGrid strokeDasharray="3 3" />
                         <XAxis type="number" dataKey="citationCount" name="Citations" />
-                        <YAxis type="category" dataKey="impactScore" name="Impact" width={100} />
-                        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                        <Legend />
+                        <YAxis
+                            type="category"
+                            dataKey="impactScore"
+                            name="Impact"
+                            width={100}
+                            tickFormatter={enumToDisplay}
+                        />
+                        <Tooltip
+                            cursor={{ strokeDasharray: '3 3' }}
+                            formatter={(value: any, name: any) => [value, name === 'Impact' ? enumToDisplay(value as string) : value]}
+                        />
+                        <Legend formatter={(value) => enumToDisplay(value)} />
                         {Object.entries(grouped).map(([impact, items]) => (
                             <Scatter key={impact} name={impact} data={items} fill={IMPACT_COLORS[impact] || "#8884d8"} />
                         ))}
