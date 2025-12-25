@@ -26,10 +26,10 @@ export default function FunnelChart({ data }: Props) {
             <CardHeader title="Reading Pipeline" titleTypographyProps={{ variant: 'h6' }} />
             <CardContent sx={{ height: 300 }}>
                 <ResponsiveContainer width="100%" height="100%">
-                    <ReFunnelChart>
+                    <ReFunnelChart margin={{ top: 5, right: 100, left: 5, bottom: 5 }}>
                         <Tooltip formatter={(value: any, _name: any, props: any) => [value, props.payload.stage]} />
                         <Funnel dataKey="count" data={chartData} isAnimationActive>
-                            <LabelList position="right" fill="#000" stroke="none" dataKey="stage" />
+                            <LabelList position="right" fill="#000" stroke="none" dataKey="stage" fontSize={14} />
                             {chartData.map((_, index) => (
                                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                             ))}
