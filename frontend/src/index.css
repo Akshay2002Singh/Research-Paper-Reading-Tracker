@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* We're keeping tailwind directives just in case utility classes are still useful for layout, 
+   even if we don't use shadcn components. 
+   If user strictly wants NO tailwind, I should remove it, but they said "use MUI".
+   I will keep basic utilities as they are super helpful for margins/flexbox.
+   But I will remove the shadcn specific variables from :root to clean up.
+*/
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}

@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum ResearchDomain {
+  Computer_Science @map("Computer Science")
+  Biology
+  Physics
+  Chemistry
+  Mathematics
+  Social_Sciences @map("Social Sciences")
+}
+
+enum ReadingStage {
+  Abstract_Read @map("Abstract Read")
+  Introduction_Done @map("Introduction Done")
+  Methodology_Done @map("Methodology Done")
+  Results_Analyzed @map("Results Analyzed")
+  Fully_Read @map("Fully Read")
+  Notes_Completed @map("Notes Completed")
+}
+
+enum ImpactScore {
+  High_Impact @map("High Impact")
+  Medium_Impact @map("Medium Impact")
+  Low_Impact @map("Low Impact")
+  Unknown
+}
+
+model Paper {
+  id            String         @id @default(uuid())
+  title         String
+  firstAuthor   String
+  domain        ResearchDomain
+  readingStage  ReadingStage
+  citationCount Int
+  impactScore   ImpactScore
+  dateAdded     DateTime       @default(now())
+  createdAt     DateTime       @default(now())
+
+  @@map("papers")
+  @@index([domain])
+  @@index([readingStage])
+  @@index([impactScore])
+  @@index([dateAdded])
+}
