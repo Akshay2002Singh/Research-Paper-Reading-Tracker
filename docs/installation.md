@@ -44,7 +44,7 @@ The backend will start on **http://localhost:4000**
 cd frontend
 
 # Install dependencies
-npm install
+npm i --legacy-peer-deps
 
 # Start the development server
 npm run dev
