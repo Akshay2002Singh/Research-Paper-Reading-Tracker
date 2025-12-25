@@ -17,8 +17,7 @@ import {
     DialogContent,
     DialogActions,
     Button,
-    Grid,
-    Divider
+    Grid
 } from '@mui/material';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import CloseIcon from '@mui/icons-material/Close';
