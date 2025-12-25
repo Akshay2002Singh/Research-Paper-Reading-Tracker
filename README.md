@@ -18,6 +18,11 @@ Detailed documentation is available in the `docs/` directory:
 - 🔌 **[API Endpoints](./docs/api_endpoints.md)**: Documentation for backend REST APIs.
 - 🗃️ **[Database & Data Model](./docs/database.md)**: Prisma schema and enum definitions.
 
+## 🔗 Live Links
+
+- 🌐 **Frontend**: [research-paper-reading-tracker-frontend.onrender.com](https://research-paper-reading-tracker-frontend.onrender.com/library)
+- ⚙️ **Backend API (Health)**: [research-paper-reading-tracker-snpq.onrender.com](https://research-paper-reading-tracker-snpq.onrender.com/health-check)
+
 ## 🏗️ Tech Stack
 
 ### Frontend
